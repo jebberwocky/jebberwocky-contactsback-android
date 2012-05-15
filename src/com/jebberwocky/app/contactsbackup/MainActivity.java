@@ -8,22 +8,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.ContactsContract;
-import android.util.Log;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import com.google.gson.Gson;
-import com.jebberwocky.app.contactsbackup.export.CsvExporter;
-import com.jebberwocky.app.contactsbackup.export.Exporter;
-import com.jebberwocky.app.contactsbackup.export.TextExporter;
-import com.jebberwocky.app.contactsbackup.export.XmlExporter;
+import com.jebberwocky.app.contactsbackup.export.*;
 
 public class MainActivity extends Activity
 {
@@ -68,8 +60,7 @@ public class MainActivity extends Activity
                 mThread.start();
             }
         });
-        //Exporter exporter = new CsvExporter();
-        //exporter.ExportToFile(contacts);
+
     }
 
     private Handler mHandler = new Handler(){
@@ -79,6 +70,7 @@ public class MainActivity extends Activity
                     alert.setTitle("Finish!").setMessage("Total "+msg.arg2+" contacts").setNeutralButton("OK", null).show();
                     mButton.setEnabled(true);
                     Thread.currentThread().interrupt();
+                    runExporter();
                     break;
                 case NEXT:
                     if(!Thread.currentThread().isInterrupted()){
@@ -174,4 +166,17 @@ public class MainActivity extends Activity
         cursor.close();
 
     }//getContactInfo
+
+    protected void runExporter(){
+        List<Exporter> exporters = new LinkedList<Exporter>();
+        exporters.add(new CsvExporter());
+        exporters.add(new GsonExporter());
+        exporters.add(new TextExporter());
+        exporters.add(new XmlExporter());
+        //Exporter exporter = new CsvExporter();
+        //exporter.ExportToFile(contacts)
+        for(Exporter exporter: exporters){
+            exporter.export(contacts);
+        }
+    }
 }
