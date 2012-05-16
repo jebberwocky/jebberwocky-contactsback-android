@@ -71,7 +71,6 @@ public class MainActivity extends Activity {
                 case STOP:
                     alert.setTitle("Finish!").setMessage("Total " + msg.arg2 + " contacts").setNeutralButton("OK", null).show();
                     mButton.setEnabled(true);
-                    //Thread.currentThread().interrupt();
                     runExporter();
                     break;
                 case NEXT:
@@ -201,8 +200,6 @@ public class MainActivity extends Activity {
         exporters.add(new GsonExporter());
         exporters.add(new TextExporter());
         exporters.add(new XmlExporter());
-        //Exporter exporter = new CsvExporter();
-        //exporter.ExportToFile(contacts)
         for (Exporter exporter : exporters) {
             exporter.export(contacts);
         }
