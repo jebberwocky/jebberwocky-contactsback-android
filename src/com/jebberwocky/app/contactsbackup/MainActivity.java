@@ -201,7 +201,7 @@ public class MainActivity extends Activity {
         exporters.add(new TextExporter());
         exporters.add(new XmlExporter());
         for (Exporter exporter : exporters) {
-            exporter.export(contacts);
+            exporter.ExportToFile(contacts);
         }
     }
 }
