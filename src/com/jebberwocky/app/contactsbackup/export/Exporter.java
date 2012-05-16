@@ -10,6 +10,6 @@ import com.jebberwocky.app.contactsbackup.Contacts;
  * To change this template use File | Settings | File Templates.
  */
 public interface Exporter {
-    public String export(Contacts contacts);
+    //public String export(Contacts contacts);
     public void ExportToFile(Contacts contacts);
 }

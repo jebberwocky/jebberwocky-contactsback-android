@@ -69,7 +69,6 @@ public class MainActivity extends Activity
                 case STOP:
                     alert.setTitle("Finish!").setMessage("Total "+msg.arg2+" contacts").setNeutralButton("OK", null).show();
                     mButton.setEnabled(true);
-                    Thread.currentThread().interrupt();
                     runExporter();
                     break;
                 case NEXT:
@@ -176,7 +175,7 @@ public class MainActivity extends Activity
         //Exporter exporter = new CsvExporter();
         //exporter.ExportToFile(contacts)
         for(Exporter exporter: exporters){
-            exporter.export(contacts);
+            exporter.ExportToFile(contacts);
         }
     }
 }

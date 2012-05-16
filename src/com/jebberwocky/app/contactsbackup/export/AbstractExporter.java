@@ -2,14 +2,11 @@ package com.jebberwocky.app.contactsbackup.export;
 
 import android.os.Environment;
 import android.util.Log;
-import com.jebberwocky.app.contactsbackup.Contact;
 import com.jebberwocky.app.contactsbackup.Contacts;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
-import java.nio.charset.Charset;
-import java.util.Map;
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,12 +25,13 @@ public abstract class AbstractExporter implements Exporter{
         this.TAG = this.getClass().toString();
     }
 
-    @Override
     public abstract String export(Contacts contacts);
 
     protected  abstract  String getFileName();
 
-    protected  abstract  String getFolderName();
+    protected  String getFolderName(){
+        return this.parent_folder;
+    }
 
     private File getFile(){
         boolean mExternalStorageAvailable = false;

@@ -25,11 +25,13 @@ public class CsvExporter implements Exporter {
 
     protected  String parent_folder = "/contacts-backup/";
 
+    /*
     @Override
     public String export(Contacts contacts) {
        //use ExportToFile
        throw new UnsupportedOperationException();
     }
+    */
 
     @Override
     public void ExportToFile(Contacts contacts) {
